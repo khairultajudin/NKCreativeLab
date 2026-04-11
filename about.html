@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — NK Creative Lab | Our Story & Mission</title>
+  <meta name="description" content="Learn about NK Creative Lab — a creative and technical agency helping brands, students, and businesses build solutions through design, technology, and fabrication." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <style>
+    /* About Page */
+
+    /* Story section */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-content .section-label { margin-bottom: 1rem; }
+
+    .story-content h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-content p {
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .story-image {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+    }
+
+    .story-image::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: calc(var(--radius-lg) + 2px);
+      background: var(--gradient);
+      z-index: -1;
+      opacity: 0.45;
+    }
+
+    .story-float-card {
+      position: absolute;
+      top: 2rem;
+      left: -2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      backdrop-filter: blur(10px);
+      min-width: 180px;
+    }
+
+    .story-float-card .big-num {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .story-float-card p {
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      margin-top: 0.35rem;
+    }
+
+    /* Values */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+      transform-origin: left;
+    }
+
+    .value-card:hover::before { transform: scaleX(1); }
+
+    .value-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .value-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .value-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    /* Process */
+    .process-section {
+      background: var(--bg-secondary);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: var(--gradient);
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .process-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .process-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: white;
+      margin: 0 auto 1.25rem;
+      position: relative;
+    }
+
+    .process-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .process-card p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    /* Team / expertise */
+    .expertise-section { background: var(--bg-secondary); }
+
+    .expertise-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .expertise-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .expertise-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+
+    .expertise-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .expertise-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .expertise-item p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Skill bars */
+    .skill-row {
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .skill-pct {
+      font-size: 0.8rem;
+      color: var(--accent-light);
+      font-weight: 700;
+    }
+
+    .skill-bar {
+      height: 6px;
+      background: var(--bg-card);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: var(--gradient);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-fill.animated {
+      /* Applied via JS */
+    }
+
+    /* Quote banner */
+    .quote-banner {
+      background: var(--gradient);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-banner::before {
+      content: '"';
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20rem;
+      font-family: Georgia, serif;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-banner blockquote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: white;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      line-height: 1.4;
+      position: relative;
+    }
+
+    .quote-banner cite {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* CTA bottom */
+    .about-cta {
+      text-align: center;
+      padding: 6rem 0;
+      background: var(--bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 350px;
+      background: radial-gradient(ellipse, rgba(48,134,227,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-grid::before { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .story-float-card { left: 1rem; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .expertise-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" id="site-logo">
+        <img src="assets/images/logo.png" alt="NK Creative Lab logo" />
+        <span class="logo-text">NK <span>Creative Lab</span></span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="services.html" id="nav-services">Services</a></li>
+        <li><a href="portfolio.html" id="nav-portfolio">Portfolio</a></li>
+        <li><a href="about.html" id="nav-about">About</a></li>
+        <li><a href="contact.html" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="navbar-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <span class="t-icon icon-moon">🌙</span>
+          <span class="t-icon icon-sun">☀️</span>
+        </button>
+        <a href="https://wa.me/your-number" class="btn btn-primary navbar-cta" id="nav-cta" target="_blank" rel="noopener">💬 Free Consultation</a>
+        <button class="hamburger" id="hamburger" aria-label="Open mobile menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/your-number" class="btn btn-primary" target="_blank" rel="noopener">💬 Get Free Consultation</a>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="justify-content:center;">About US</div>
+      <h1>Built on Passion. <span class="gradient-text">Driven by Results.</span></h1>
+      <p>We're NK Creative Lab — a team of creators, engineers, and problem-solvers dedicated to bringing ideas to life through design, technology, and fabrication.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Our Story -->
+    <section class="section" id="our-story">
+      <div class="container">
+        <div class="story-grid">
+          <div class="story-content reveal-left">
+            <div class="section-label">Our Story</div>
+            <h2>From a Simple Idea to a <span class="gradient-text">Full Creative Studio</span></h2>
+            <p>NK Creative Lab was born from a simple belief: great ideas deserve to be seen, heard, and touched. What started as a passion for design and electronics quickly grew into a full-service creative and technical studio.</p>
+            <p>We've helped startups launch their first brands, students ace their engineering projects, and businesses grow their online presence. Each project is personal to us — we treat your goals as our own and don't stop until you're proud of what we've built together.</p>
+            <p>Today, we offer six core service areas under one roof — from pixel-perfect graphic design to custom PCBs and physical 3D-printed products — giving clients a seamless, end-to-end experience without the hassle of juggling multiple vendors.</p>
+            <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;">
+              <div>
+                <div class="stat-number counter-up" data-target="100" data-suffix="+">0</div>
+                <div class="stat-label">Projects Done</div>
+              </div>
+              <div>
+                <div class="stat-number counter-up" data-target="50" data-suffix="+">0</div>
+                <div class="stat-label">Happy Clients</div>
+              </div>
+              <div>
+                <div class="stat-number counter-up" data-target="3" data-suffix=" yrs">0</div>
+                <div class="stat-label">Experience</div>
+              </div>
+            </div>
+          </div>
+          <div class="story-image reveal-right">
+            <img src="assets/images/hero_bg.png" alt="NK Creative Lab workspace and team" />
+            <div class="story-float-card float">
+              <div class="big-num">98%</div>
+              <p>Client Satisfaction Rate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Banner -->
+    <div class="quote-banner" aria-label="Our mission statement">
+      <div class="container">
+        <blockquote>"We don't just deliver files and call it done. We deliver impact — measurable, meaningful, and made to last."</blockquote>
+        <cite>— NK Creative Lab Team</cite>
+      </div>
+    </div>
+
+    <!-- Our Values -->
+    <section class="section" id="our-values" style="background:var(--bg-secondary);">
+      <div class="container">
+        <div class="reveal text-center">
+          <div class="section-label">What We Stand For</div>
+          <h2 class="section-title">Our Core <span class="gradient-text">Values</span></h2>
+          <p class="section-subtitle" style="margin:0 auto 3rem;">Everything we do is grounded in these four pillars.</p>
+        </div>
+        <div class="values-grid">
+          <div class="value-card reveal reveal-delay-1" id="val-1">
+            <span class="value-icon">🎯</span>
+            <h3>Results First</h3>
+            <p>We're not just here to make things look good. We design and build with real outcomes in mind — leads, sales, and recognition.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-2" id="val-2">
+            <span class="value-icon">💡</span>
+            <h3>Creative Excellence</h3>
+            <p>We push past the obvious. Every project gets fresh thinking, bold ideas, and craftsmanship that sets it apart from the generic.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-3" id="val-3">
+            <span class="value-icon">🤝</span>
+            <h3>Client Partnership</h3>
+            <p>We listen deeply, communicate clearly, and treat every client like a long-term partner — not just a one-off transaction.</p>
+          </div>
+          <div class="value-card reveal reveal-delay-4" id="val-4">
+            <span class="value-icon">⚙️</span>
+            <h3>Technical Precision</h3>
+            <p>Whether it's a pixel or a millimeter, we sweat the details. Quality isn't an afterthought — it's baked into everything we do.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise & Skills -->
+    <section class="section" id="expertise">
+      <div class="container">
+        <div class="grid-2" style="gap:5rem;align-items:center;">
+          <div class="reveal-left">
+            <div class="section-label">What We're Good At</div>
+            <h2 class="section-title">Our <span class="gradient-text">Expertise</span></h2>
+            <p style="color:var(--text-secondary);margin-bottom:2.5rem;line-height:1.8;">We've invested years mastering these disciplines so you don't have to spend months finding multiple specialists.</p>
+
+            <div class="skill-row" id="skill-1">
+              <div class="skill-header">
+                <span class="skill-name">🎨 Graphic &amp; Brand Design</span>
+                <span class="skill-pct">95%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+            </div>
+
+            <div class="skill-row" id="skill-2">
+              <div class="skill-header">
+                <span class="skill-name">🧊 3D Modeling &amp; Rendering</span>
+                <span class="skill-pct">90%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+            </div>
+
+            <div class="skill-row" id="skill-3">
+              <div class="skill-header">
+                <span class="skill-name">💻 Web Development</span>
+                <span class="skill-pct">92%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            </div>
+
+            <div class="skill-row" id="skill-4">
+              <div class="skill-header">
+                <span class="skill-name">🖨️ 3D Printing &amp; Fabrication</span>
+                <span class="skill-pct">88%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            </div>
+
+            <div class="skill-row" id="skill-5">
+              <div class="skill-header">
+                <span class="skill-name">🔌 PCB &amp; Electronics Design</span>
+                <span class="skill-pct">85%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            </div>
+
+            <div class="skill-row" id="skill-6">
+              <div class="skill-header">
+                <span class="skill-name">🤖 Robotics &amp; Embedded Systems</span>
+                <span class="skill-pct">87%</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
+            </div>
+          </div>
+
+          <div class="reveal-right">
+            <div class="expertise-list">
+              <div class="expertise-item" id="exp-1">
+                <span class="expertise-icon">🎨</span>
+                <div>
+                  <h4>Adobe Creative Suite</h4>
+                  <p>Photoshop, Illustrator, InDesign, Premiere, After Effects</p>
+                </div>
+              </div>
+              <div class="expertise-item" id="exp-2">
+                <span class="expertise-icon">🧊</span>
+                <div>
+                  <h4>3D Software</h4>
+                  <p>Blender, Fusion 360, SolidWorks, KeyShot</p>
+                </div>
+              </div>
+              <div class="expertise-item" id="exp-3">
+                <span class="expertise-icon">💻</span>
+                <div>
+                  <h4>Web Technologies</h4>
+                  <p>HTML, CSS, JS, React, WordPress, Wix</p>
+                </div>
+              </div>
+              <div class="expertise-item" id="exp-4">
+                <span class="expertise-icon">🖨️</span>
+                <div>
+                  <h4>3D Printing</h4>
+                  <p>FDM (PLA/PETG/ABS), Resin (MSLA/DLP)</p>
+                </div>
+              </div>
+              <div class="expertise-item" id="exp-5">
+                <span class="expertise-icon">🔌</span>
+                <div>
+                  <h4>PCB Tools</h4>
+                  <p>KiCad, EasyEDA, Altium, Eagle</p>
+                </div>
+              </div>
+              <div class="expertise-item" id="exp-6">
+                <span class="expertise-icon">🤖</span>
+                <div>
+                  <h4>Electronics Platforms</h4>
+                  <p>Arduino, ESP32, Raspberry Pi, STM32</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Process -->
+    <section class="section process-section" id="our-process">
+      <div class="container">
+        <div class="reveal text-center">
+          <div class="section-label">How We Work</div>
+          <h2 class="section-title">Our Step-by-Step <span class="gradient-text">Process</span></h2>
+          <p class="section-subtitle" style="margin:0 auto 3rem;">No surprises, no confusion — just a clear, collaborative path from idea to delivery.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-card reveal reveal-delay-1" id="pc-1">
+            <div class="process-num">1</div>
+            <h3>📞 Discovery Call</h3>
+            <p>We start with a free WhatsApp or video call to deeply understand your project, goals, and budget.</p>
+          </div>
+          <div class="process-card reveal reveal-delay-2" id="pc-2">
+            <div class="process-num">2</div>
+            <h3>📋 Proposal & Quote</h3>
+            <p>You receive a detailed proposal with scope, timeline, pricing, and deliverables — no hidden costs.</p>
+          </div>
+          <div class="process-card reveal reveal-delay-3" id="pc-3">
+            <div class="process-num">3</div>
+            <h3>🚀 Execution</h3>
+            <p>Our experts get to work while keeping you updated with regular check-ins and milestone previews.</p>
+          </div>
+          <div class="process-card reveal reveal-delay-4" id="pc-4">
+            <div class="process-num">4</div>
+            <h3>🔄 Review & Refine</h3>
+            <p>You review the work and request revisions freely. We iterate until you're completely satisfied.</p>
+          </div>
+          <div class="process-card reveal reveal-delay-5" id="pc-5">
+            <div class="process-num">5</div>
+            <h3>📦 Final Delivery</h3>
+            <p>Receive all files, outputs, or physical products — neatly packaged and ready to launch.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us (clients) -->
+    <section class="section" id="why-clients">
+      <div class="container">
+        <div class="reveal text-center">
+          <div class="section-label">Why Choose Us</div>
+          <h2 class="section-title">What Makes NK Creative Lab <span class="gradient-text">Different</span></h2>
+        </div>
+        <div class="grid-3 mt-lg" style="gap:1.5rem;">
+          <div class="card reveal reveal-delay-1" id="diff-1">
+            <div class="icon-box">🏠</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">One-Stop Studio</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">Get design, development, and fabrication all under one roof. No need to juggle multiple agencies or vendors.</p>
+          </div>
+          <div class="card reveal reveal-delay-2" id="diff-2">
+            <div class="icon-box">💬</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">WhatsApp-First Communication</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">We communicate the way you do — fast, casual, and direct. Get updates and approvals right from your phone.</p>
+          </div>
+          <div class="card reveal reveal-delay-3" id="diff-3">
+            <div class="icon-box">🎓</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">Student-Friendly</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">We actively help students with robotics, PCB, and design projects at fair prices — with mentorship included.</p>
+          </div>
+          <div class="card reveal reveal-delay-4" id="diff-4">
+            <div class="icon-box">⚡</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">Fast Turnaround</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">Most design projects are delivered within 3–7 days. Need it faster? We offer rush delivery options.</p>
+          </div>
+          <div class="card reveal reveal-delay-5" id="diff-5">
+            <div class="icon-box">💰</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">Transparent Pricing</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">No surprise invoices. You'll know exactly what you're paying for before any work begins.</p>
+          </div>
+          <div class="card reveal reveal-delay-6" id="diff-6">
+            <div class="icon-box">🔄</div>
+            <h3 style="font-size:1.05rem;margin-bottom:0.6rem;">Revision-Friendly</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.65;">We don't lock you in to a single draft. Revisions are part of the process — built right into our workflow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="about-cta">
+      <div class="container reveal">
+        <div class="section-label" style="justify-content:center;">Ready to Work Together?</div>
+        <h2 class="section-title">Let's Build Something <span class="gradient-text">You're Proud Of</span></h2>
+        <p style="color:var(--text-secondary);max-width:520px;margin:0 auto 2.5rem;line-height:1.75;">Whether you're starting from scratch or levelling up an existing project, we've got the skills and passion to make it happen.</p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+          <a href="https://wa.me/your-number?text=Hi%20NK%20Creative%20Lab%2C%20I'd%20like%20to%20start%20a%20project" class="btn btn-primary" id="about-cta-wa" target="_blank" rel="noopener" style="background:#25D366;box-shadow:0 4px 20px rgba(37,211,102,0.35);">
+            💬 Chat on WhatsApp
+          </a>
+          <a href="contact.html" class="btn btn-secondary" id="about-cta-contact">📩 Send Us a Message</a>
+          <a href="portfolio.html" class="btn btn-secondary" id="about-cta-portfolio">🎨 View Our Work</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">NK <span>Creative Lab</span></div>
+          <p>Turning ideas into creative, technical, and practical solutions for brands, students, and businesses.</p>
+          <div class="footer-social">
+            <a href="https://wa.me/your-number" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="https://tiktok.com/@nkcreativelab" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+            <a href="mailto:nkcreativelab@email.com" aria-label="Email">✉</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html#graphic-design">Graphic Design</a></li>
+            <li><a href="services.html#3d-design">3D Design</a></li>
+            <li><a href="services.html#3d-printing">3D Printing</a></li>
+            <li><a href="services.html#web-dev">Web Development</a></li>
+            <li><a href="services.html#pcb">PCB Development</a></li>
+            <li><a href="services.html#robotics">Robotics Projects</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <ul>
+            <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">💬 WhatsApp Us</a></li>
+            <li><a href="mailto:nkcreativelab@email.com">✉ Email</a></li>
+            <li><a href="https://tiktok.com/@nkcreativelab" target="_blank" rel="noopener">🎵 TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 NK Creative Lab. All rights reserved.</p>
+        <p>Made with ❤️ in Malaysia</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/your-number" class="whatsapp-float" id="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    // Animate skill bars on scroll
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+            const width = fill.dataset.width;
+            setTimeout(() => { fill.style.width = width + '%'; }, 200);
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skill-row').forEach(el => skillObserver.observe(el));
+  </script>
+</body>
+</html>

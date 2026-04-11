@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — NK Creative Lab | Design, 3D, Web, PCB & Robotics</title>
+  <meta name="description" content="Explore NK Creative Lab's full range of services: Graphic Design, 3D Design, 3D Printing, Website Development, PCB Development, and Robotics Projects." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <style>
+    /* Services Page Styles */
+    .service-detail {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-detail:last-child { border-bottom: none; }
+
+    .service-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .service-detail-grid.reverse {
+      direction: rtl;
+    }
+
+    .service-detail-grid.reverse > * {
+      direction: ltr;
+    }
+
+    .service-detail-content .service-big-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .service-detail-content h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .service-detail-content .service-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .service-list-item .check {
+      width: 20px;
+      height: 20px;
+      background: rgba(48,134,227,0.12);
+      border: 1px solid rgba(48,134,227,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--accent-light);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .service-benefits {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-benefits h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-light);
+      margin-bottom: 1rem;
+    }
+
+    .benefits-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .benefit-tag {
+      background: rgba(48,134,227,0.1);
+      border: 1px solid rgba(48,134,227,0.22);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.8rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    .service-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .service-visual img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .service-visual:hover img {
+      transform: scale(1.04);
+    }
+
+    .service-visual::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: calc(var(--radius-lg) + 2px);
+      background: var(--gradient);
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    .service-example {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      right: 1.25rem;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.875rem 1.25rem;
+    }
+
+    .service-example span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    .service-example p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    /* No image placeholder */
+    .service-placeholder {
+      width: 100%;
+      height: 400px;
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      font-size: 3rem;
+    }
+
+    .service-placeholder p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Pricing hint */
+    .pricing-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(108,175,131,0.1);
+      border: 1px solid rgba(108,175,131,0.25);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.82rem;
+      color: var(--green-light);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .service-detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .service-detail-grid.reverse { direction: ltr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" id="site-logo">
+        <img src="assets/images/logo.png" alt="NK Creative Lab logo" />
+        <span class="logo-text">NK <span>Creative Lab</span></span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="services.html" id="nav-services">Services</a></li>
+        <li><a href="portfolio.html" id="nav-portfolio">Portfolio</a></li>
+        <li><a href="about.html" id="nav-about">About</a></li>
+        <li><a href="contact.html" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="navbar-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+          <span class="t-icon icon-moon">🌙</span>
+          <span class="t-icon icon-sun">☀️</span>
+        </button>
+        <a href="https://wa.me/your-number" class="btn btn-primary navbar-cta" id="nav-cta" target="_blank" rel="noopener">💬 Free Consultation</a>
+        <button class="hamburger" id="hamburger" aria-label="Open mobile menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/your-number" class="btn btn-primary" target="_blank" rel="noopener">💬 Get Free Consultation</a>
+  </div>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <div class="section-label" style="justify-content:center;" aria-hidden="true">Our Services</div>
+      <h1>Everything You Need, <span class="gradient-text">Under One Roof</span></h1>
+      <p>From design to development to fabrication — NK Creative Lab delivers end-to-end creative and technical solutions for modern businesses.</p>
+    </div>
+  </div>
+
+  <!-- Quick Nav -->
+  <div style="background:var(--bg-secondary);border-bottom:1px solid var(--border);padding:1rem 0;position:sticky;top:73px;z-index:900;">
+    <div class="container">
+      <div style="display:flex;gap:1.5rem;overflow-x:auto;padding-bottom:2px;" id="service-quicknav">
+        <a href="#graphic-design" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">🎨 Graphic Design</a>
+        <a href="#3d-design" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">🧊 3D Design</a>
+        <a href="#3d-printing" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">🖨️ 3D Printing</a>
+        <a href="#web-dev" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">💻 Web Development</a>
+        <a href="#pcb" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">🔌 PCB Development</a>
+        <a href="#robotics" style="white-space:nowrap;color:var(--text-secondary);font-size:0.875rem;font-weight:500;padding:0.4rem 0;border-bottom:2px solid transparent;transition:var(--transition);" onmouseover="this.style.color='var(--accent-light)';this.style.borderColor='var(--accent)';" onmouseout="this.style.color='var(--text-secondary)';this.style.borderColor='transparent';">🤖 Robotics</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Detail -->
+  <main>
+
+    <!-- 1. Graphic Design -->
+    <section class="service-detail" id="graphic-design">
+      <div class="container">
+        <div class="service-detail-grid">
+          <div class="service-detail-content reveal-left">
+            <span class="service-big-icon">🎨</span>
+            <div class="pricing-note">💰 Packages from RM 99</div>
+            <h2>Graphic Design <span class="gradient-text">that Makes an Impact</span></h2>
+            <p class="service-desc">Your visual identity is the first handshake between your brand and your audience. We create bold, beautiful, and memorable designs that communicate your brand story and build lasting recognition.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>Logo design & brand identity systems</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Business cards, letterheads, and stationery</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Social media graphics, banners, and ads</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Poster, flyer, and print design</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Packaging and label design</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Presentation and pitch deck design</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">Brand Recognition</span>
+                <span class="benefit-tag">Stand Out from Competitors</span>
+                <span class="benefit-tag">Professional Image</span>
+                <span class="benefit-tag">Consistent Identity</span>
+                <span class="benefit-tag">Print Ready Files</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%20Graphic%20Design%20services" class="btn btn-primary" id="gd-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-right">
+            <img src="assets/images/portfolio_graphic.png" alt="Graphic design work by NK Creative Lab" />
+            <div class="service-example">
+              <span>Example Work</span>
+              <p>Brand Identity & Visual Design Package</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 3D Design -->
+    <section class="service-detail" id="3d-design" style="background:var(--bg-secondary);">
+      <div class="container">
+        <div class="service-detail-grid reverse">
+          <div class="service-detail-content reveal-right">
+            <span class="service-big-icon">🧊</span>
+            <div class="pricing-note">💰 Packages from RM 150</div>
+            <h2>3D Design <span class="gradient-text">that Brings Ideas to Life</span></h2>
+            <p class="service-desc">From product visualization to architectural renders and animated explainer content — our 3D design team delivers photorealistic assets that wow clients, investors, and customers.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>Product 3D modeling and visualization</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Photorealistic rendering with lighting & materials</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>3D animation and turntable videos</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Architectural and interior 3D renders</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Character and figurine design</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>STL file preparation for 3D printing</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">Impress Clients</span>
+                <span class="benefit-tag">Reduce Prototyping Costs</span>
+                <span class="benefit-tag">Marketing-Ready Visuals</span>
+                <span class="benefit-tag">No Physical Prototype Needed</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%203D%20Design%20services" class="btn btn-primary" id="threed-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-left">
+            <img src="assets/images/portfolio_3d.png" alt="3D design project by NK Creative Lab" />
+            <div class="service-example">
+              <span>Example Work</span>
+              <p>Product Visualization & 3D Render Series</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 3D Printing -->
+    <section class="service-detail" id="3d-printing">
+      <div class="container">
+        <div class="service-detail-grid">
+          <div class="service-detail-content reveal-left">
+            <span class="service-big-icon">🖨️</span>
+            <div class="pricing-note">💰 Priced per gram / complexity</div>
+            <h2>3D Printing Services <span class="gradient-text">for Real-World Results</span></h2>
+            <p class="service-desc">Turn digital files into physical reality. Our professional FDM and resin printers produce high-quality parts, prototypes, and custom products with precision and clean finish — ready for use or display.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>FDM printing in PLA, PETG, ABS, TPU</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Resin printing for ultra-fine details</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Custom enclosures and housings for electronics</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Prototype parts and functional components</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Miniatures, figurines, and display models</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Post-processing: sanding, painting, finishing</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">Rapid Prototyping</span>
+                <span class="benefit-tag">Cost-Effective</span>
+                <span class="benefit-tag">Custom Shapes</span>
+                <span class="benefit-tag">Multiple Materials</span>
+                <span class="benefit-tag">Fast Turnaround</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%203D%20Printing%20services" class="btn btn-primary" id="print-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-right">
+            <div class="service-placeholder">
+              🖨️
+              <p>3D Printing Preview</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Web Dev -->
+    <section class="service-detail" id="web-dev" style="background:var(--bg-secondary);">
+      <div class="container">
+        <div class="service-detail-grid reverse">
+          <div class="service-detail-content reveal-right">
+            <span class="service-big-icon">💻</span>
+            <div class="pricing-note">💰 Packages from RM 499</div>
+            <h2>Website Development <span class="gradient-text">Built to Convert</span></h2>
+            <p class="service-desc">A great website is your best salesperson. We build fast, modern, SEO-optimized websites that look stunning across all devices and drive real business results — from landing pages to full e-commerce stores.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>Business websites and landing pages</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>E-commerce and online stores</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Portfolio and personal branding sites</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>WhatsApp-integrated contact and lead forms</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Mobile-first responsive design</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>On-page SEO and performance optimization</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">24/7 Online Presence</span>
+                <span class="benefit-tag">More Leads</span>
+                <span class="benefit-tag">SEO-Optimized</span>
+                <span class="benefit-tag">Mobile-Ready</span>
+                <span class="benefit-tag">Fast Loading</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%20Website%20Development" class="btn btn-primary" id="web-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-left">
+            <img src="assets/images/portfolio_web.png" alt="Website development by NK Creative Lab" />
+            <div class="service-example">
+              <span>Example Work</span>
+              <p>Business Website with Lead Generation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PCB -->
+    <section class="service-detail" id="pcb">
+      <div class="container">
+        <div class="service-detail-grid">
+          <div class="service-detail-content reveal-left">
+            <span class="service-big-icon">🔌</span>
+            <div class="pricing-note">💰 Custom quote based on complexity</div>
+            <h2>PCB Development <span class="gradient-text">for your Electronics Projects</span></h2>
+            <p class="service-desc">From schematic to manufactured board — we design custom PCBs for IoT devices, microcontroller breakouts, sensor boards, and more. Whether it's a one-off prototype or a small batch, we've got you covered.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>Schematic design and circuit simulation</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>PCB layout and routing (single/multi-layer)</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Gerber file preparation for manufacturing</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Arduino, ESP32, STM32-based designs</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Sensor integration and power management</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Prototype coordination with PCB manufacturers</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">Custom Hardware</span>
+                <span class="benefit-tag">Compact Design</span>
+                <span class="benefit-tag">Professional Grade</span>
+                <span class="benefit-tag">Manufacture-Ready</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%20PCB%20Development" class="btn btn-primary" id="pcb-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-right">
+            <img src="assets/images/portfolio_pcb.png" alt="PCB development by NK Creative Lab" />
+            <div class="service-example">
+              <span>Example Work</span>
+              <p>Custom IoT PCB Development Board</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Robotics -->
+    <section class="service-detail" id="robotics" style="background:var(--bg-secondary);">
+      <div class="container">
+        <div class="service-detail-grid reverse">
+          <div class="service-detail-content reveal-right">
+            <span class="service-big-icon">🤖</span>
+            <div class="pricing-note">💰 Custom quote based on complexity</div>
+            <h2>Robotics Projects <span class="gradient-text">from Concept to Completion</span></h2>
+            <p class="service-desc">We build and program robots for education, research, competitions, and industrial automation. From line-following bots to complex autonomous systems — we make robotics accessible and exciting.</p>
+            <div class="service-list">
+              <div class="service-list-item"><span class="check">✓</span><span>Arduino &amp; Raspberry Pi robot builds</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Line-following, maze-solving, obstacle-avoidance</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Robotic arm and manipulator projects</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Autonomous drone and UAV components</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>IoT-enabled smart machines</span></div>
+              <div class="service-list-item"><span class="check">✓</span><span>Competition robot design and build</span></div>
+            </div>
+            <div class="service-benefits">
+              <h4>Key Benefits</h4>
+              <div class="benefits-row">
+                <span class="benefit-tag">Educational Value</span>
+                <span class="benefit-tag">Competition Ready</span>
+                <span class="benefit-tag">Full Documentation</span>
+                <span class="benefit-tag">Customizable</span>
+                <span class="benefit-tag">Mentorship Included</span>
+              </div>
+            </div>
+            <a href="https://wa.me/your-number?text=I'm%20interested%20in%20a%20Robotics%20Project" class="btn btn-primary" id="rob-cta" target="_blank" rel="noopener">💬 Get Quote on WhatsApp</a>
+          </div>
+          <div class="service-visual reveal-left">
+            <div class="service-placeholder">
+              🤖
+              <p>Robotics Project Preview</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Final CTA -->
+  <section class="section" style="text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(48,134,227,0.18) 0%,transparent 70%);pointer-events:none;"></div>
+    <div class="container reveal">
+      <h2 class="section-title">Not Sure Which Service You Need?</h2>
+      <p class="section-subtitle" style="margin:0 auto 2rem;">That's okay! Just tell us your idea — we'll recommend the best path and give you a free quote.</p>
+      <a href="https://wa.me/your-number?text=Hi%2C%20I'd%20like%20a%20free%20consultation" class="btn btn-primary" id="services-final-cta" style="font-size:1.05rem;padding:1rem 2.5rem;" target="_blank" rel="noopener">
+        💬 Start Free Consultation
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">NK <span>Creative Lab</span></div>
+          <p>Turning ideas into creative, technical, and practical solutions for brands, students, and businesses.</p>
+          <div class="footer-social">
+            <a href="https://wa.me/your-number" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            <a href="https://tiktok.com/@nkcreativelab" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+            <a href="mailto:nkcreativelab@email.com" aria-label="Email">✉</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#graphic-design">Graphic Design</a></li>
+            <li><a href="#3d-design">3D Design</a></li>
+            <li><a href="#3d-printing">3D Printing</a></li>
+            <li><a href="#web-dev">Web Development</a></li>
+            <li><a href="#pcb">PCB Development</a></li>
+            <li><a href="#robotics">Robotics Projects</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <ul>
+            <li><a href="https://wa.me/your-number" target="_blank" rel="noopener">💬 WhatsApp Us</a></li>
+            <li><a href="mailto:nkcreativelab@email.com">✉ Email</a></li>
+            <li><a href="https://tiktok.com/@nkcreativelab" target="_blank" rel="noopener">🎵 TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 NK Creative Lab. All rights reserved.</p>
+        <p>Made with ❤️ in Malaysia</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/your-number" class="whatsapp-float" id="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
